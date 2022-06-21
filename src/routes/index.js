@@ -1,9 +1,9 @@
 const { Router } = require('express')
 
+const userRoutes = require('./user.routes')
+
 const routes = Router()
 
-routes.get('/', async (req, res, next) => {
-    res.status(200).send('Ok')
-})
+routes.use('/users', userRoutes)
 
 module.exports = routes
