@@ -17,7 +17,7 @@ async function create({ projectName, userId }) {
 }
 
 async function findByUserId({ userId }) {
-	const projects = await Project.findAll({ where: { userId }})
+	const projects = await Project.findAll({ where: { userId }, include: Task })
 
 	if (!projects) throw new HttpException(404, 'Projects not found')
 
