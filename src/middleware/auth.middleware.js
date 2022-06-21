@@ -3,8 +3,8 @@ const jwt = require('jsonwebtoken')
 const HttpException = require('../common/http-exception')
 
 const authMiddleware = (
-    request,
-    response,
+    req,
+    res,
     next
   ) => {
 	const { authorization } = req.headers
@@ -25,4 +25,4 @@ const authMiddleware = (
 	}
 }
   
-  module.exports = authMiddleware
+module.exports = authMiddleware
