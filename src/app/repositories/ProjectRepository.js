@@ -1,9 +1,11 @@
 const Project = require('../models/Project')
+const Task = require('../models/Task')
 const HttpException = require('../../common/http-exception')
 
 const projectRepository = {
 	create,
 	findByUserId,
+	findById,
 	deleteById,
 	updateById
 }
@@ -17,7 +19,17 @@ async function create({ projectName, userId }) {
 async function findByUserId({ userId }) {
 	const projects = await Project.findAll({ where: { userId }})
 
+	if (!projects) throw new HttpException(404, 'Projects not found')
+
 	return projects
+}
+
+async function findById({ id }) {
+	const project = await Project.findByPk(id, { include: Task })
+
+	if (!project) throw new HttpException(404, 'Project not found')
+
+	return project
 }
 
 async function deleteById({ id, userId }) {

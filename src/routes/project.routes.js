@@ -30,6 +30,18 @@ projectRoutes.get('/', authMiddleware, async (req, res, next) => {
   }
 })
 
+projectRoutes.get('/:id', authMiddleware, async (req, res, next) => {
+  const id = req.params.id 
+
+	try {
+		const project = await projectRepository.findById({ id })
+
+    return res.status(200).send(project)
+  } catch (e) {
+    res.status(e.statusCode).send(e.message)
+  }
+})
+
 projectRoutes.delete('/:id', authMiddleware, async (req, res, next) => {
 	const userId = req.userId
 	const id = req.params.id 
@@ -37,7 +49,7 @@ projectRoutes.delete('/:id', authMiddleware, async (req, res, next) => {
 	try {
 		await projectRepository.deleteById({ id, userId })
 
-    return res.status(204)
+    return res.status(204).send()
   } catch (e) {
     res.status(e.statusCode).send(e.message)
   }
