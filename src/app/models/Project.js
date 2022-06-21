@@ -23,4 +23,8 @@ Project.belongsTo(User, {
 	foreignKey: 'userId'
 })
 
+User.hasMany(Project, {
+	foreignKey: 'userId'
+})
+
 module.exports = Project

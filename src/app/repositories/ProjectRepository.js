@@ -21,7 +21,7 @@ async function findByUserId({ userId }) {
 }
 
 async function deleteById({ id, userId }) {
-	const project = await Project.findOne({ where: { id }})
+	const project = await Project.findByPk(id)
 
 	if (!project) throw new HttpException(404, 'Project not found')
 	if (project.userId !== userId) throw new HttpException(401, 'Unauthorized')
@@ -30,7 +30,7 @@ async function deleteById({ id, userId }) {
 }
 
 async function updateById({ id, projectName, userId }) {
-	const project = await Project.findOne({ where: { id }})
+	const project = await Project.findByPk(id)
 
 	if (!project) throw new HttpException(404, 'Project not found')
 	if (project.userId !== userId) throw new HttpException(401, 'Unauthorized')
