@@ -1,6 +1,6 @@
 const Router = require('express')
 
-const userRepository = require('../app/repository/UserRepository')
+const userRepository = require('../app/repositories/UserRepository')
 
 const userRoutes = Router()
 
